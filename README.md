@@ -1,28 +1,56 @@
 # cloud-security-scripts
 
-Practical security automation scripts for AWS, Azure, and GCP — one script at a time.
+Practical security and DevOps automation scripts — one script a day across Cloud, DevOps, and Cybersecurity.
+
+## Structure
+
+```
+cloud/       AWS, Azure, GCP security audit scripts
+devops/      Kubernetes, Docker, CI/CD tooling
+security/    Linux hardening, recon, and CTF tools
+```
 
 ## Scripts
 
-| Script | Cloud | Description |
-|--------|-------|-------------|
-| [aws_s3_audit.py](aws_s3_audit.py) | AWS | Audits all S3 buckets for public access, encryption, versioning, logging, and ACL misconfigs |
+### Cloud (`cloud/`)
+
+| Script | Description |
+|--------|-------------|
+| [aws_s3_audit.py](cloud/aws_s3_audit.py) | Audits all S3 buckets for public access, encryption, versioning, logging, and ACL misconfigs |
+
+### DevOps (`devops/`)
+
+| Script | Description |
+|--------|-------------|
+| [k8s_resource_audit.py](devops/k8s_resource_audit.py) | Audits Kubernetes workloads for missing resource limits, liveness/readiness probes, crash loops, and empty services |
+
+### Security (`security/`)
+
+| Script | Description |
+|--------|-------------|
+| [linux_hardening_audit.sh](security/linux_hardening_audit.sh) | Audits a Linux system for SSH misconfigs, firewall status, SUID binaries, world-writable files, empty passwords, sudo logging, and open ports |
 
 ## Usage
 
+**Cloud — AWS S3 Audit**
 ```bash
 pip install boto3
-aws configure   # set up your credentials
-python aws_s3_audit.py
+aws configure
+python cloud/aws_s3_audit.py
 ```
 
-## Checks Covered
+**DevOps — Kubernetes Audit**
+```bash
+pip install kubernetes
+python devops/k8s_resource_audit.py
+```
 
-- Public access block configuration
-- Default encryption
-- Versioning status
-- Access logging
-- Bucket ACL (detects AllUsers / AuthenticatedUsers grants)
+**Security — Linux Hardening Audit**
+```bash
+sudo bash security/linux_hardening_audit.sh
+# JSON output:
+sudo bash security/linux_hardening_audit.sh --json
+```
 
 ## Contributing
 
