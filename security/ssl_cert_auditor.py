@@ -17,8 +17,10 @@ Usage:
     python ssl_cert_auditor.py --file hosts.txt
 
 Dependencies:
-    Python 3.7+, stdlib only (ssl, socket)
+    Python 3.9+, stdlib only (ssl, socket)
 """
+
+from __future__ import annotations
 
 import argparse
 import json
@@ -101,7 +103,11 @@ def check_hostname(cert: dict, host: str) -> tuple[str, str]:
 
     def matches(name: str) -> bool:
         if name.startswith("*."):
-            return host.endswith(name[1:]) and host.count(".") >= name.count(".")
+            suffix = name[1:]  # e.g. ".example.com"
+            if not host.endswith(suffix):
+                return False
+            label = host[: len(host) - len(suffix)]  # single label, no dot allowed
+            return "." not in label
         return name == host
 
     if any(matches(n) for n in all_names):
