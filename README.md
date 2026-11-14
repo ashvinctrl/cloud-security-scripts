@@ -24,6 +24,7 @@ security/    Linux hardening, web security, and secret detection
 | [aws_iam_audit.py](cloud/aws_iam_audit.py) | IAM users and roles — console access without MFA, unused access keys, overly permissive policies, root account activity |
 | [cloudtrail_threat_detector.py](cloud/cloudtrail_threat_detector.py) | CloudTrail events — privilege escalation, suspicious API calls, unusual access patterns, unauthorized activity |
 | [ec2_sg_auditor.py](cloud/ec2_sg_auditor.py) | EC2 security groups — overly permissive ingress rules (0.0.0.0/0), sensitive port exposure, orphaned groups |
+| [kms_key_auditor.py](cloud/kms_key_auditor.py) | KMS customer-managed keys — rotation disabled, keys disabled or pending deletion, key policies open to the whole account or external accounts, missing aliases |
 
 ## DevOps (`devops/`)
 
@@ -57,6 +58,7 @@ python cloud/aws_s3_audit.py
 python cloud/aws_iam_audit.py
 python cloud/ec2_sg_auditor.py
 python cloud/cloudtrail_threat_detector.py
+python cloud/kms_key_auditor.py --all-regions
 ```
 
 ### DevOps — Kubernetes audit
